@@ -1,3 +1,5 @@
+/* Small prgramm to list a file (txt or bin) in hex format */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
