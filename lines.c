@@ -27,17 +27,23 @@ static void print_lines(FILE* fp, int reqLine) {
 static void help(char *thisProgram) {
   printf("Usage: %s [number] [file]\n", thisProgram);
   printf("  number is line number to be printed\n");
-  printf("  file file to be read if omiited stdin is used\n");
+  printf("  file is file to be read if omitted stdin is used\n");
   exit(0);
 }
 
 int main(int argc, char* argv[]) {
-  if(argc == 2) {
+  if ( argc == 1 ) {
+    print_lines(stdin, 0);
+  } else if(argc == 2) {
     FILE *fp = fopen(argv[1], "r");
     if(fp) {
       print_lines(fp, 0);
     } else {
-      help(argv[0]);
+      if ( atoi(argv[1]) ) {
+        print_lines(stdin, atoi(argv[1]));
+      } else {
+        help(argv[0]);
+      }
     }
   } else if (argc == 3) {
     FILE *fp = fopen(argv[2], "r");
